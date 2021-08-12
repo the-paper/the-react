@@ -1,0 +1,9 @@
+.translate-middle-x-out {
+  transform: translate(-50%,-100%)!important;
+}
+.translate-middle-y-out {
+  transform: translate(-100%,-50%)!important;
+}
+.translate-out {
+  transform: translate(-100%,-100%)!important;
+}
