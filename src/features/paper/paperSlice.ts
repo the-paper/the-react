@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
 import { fetchPapers } from './paperAPI';
 
-
 export type Paper = {
   width: number;
   height: number;
@@ -116,11 +115,24 @@ export const selectSpaceY = (state: RootState) => {
   return (pHeight - bHeight) / 2;
 };
 
-export const afdsadsoijf = (value: number): AppThunk => (
-  dispatch,
-  getState
-) => {
+export const selectSamplePaper = (key: string): AppThunk => (dispatch, getState) => {
+  console.log(key);
+  const papers = selectPapers(getState());
+  const paper = papers.find(p => p.key === key);
+  console.log(paper);
+  if (paper) {
+    dispatch(changePaperWidth(paper.width));
+    dispatch(changePaperHeight(paper.height));
+  }
+};
 
+export const selectSampleBlock = (key: string): AppThunk => (dispatch, getState) => {
+  const blocks = selectBlocks(getState());
+  const block = blocks.find(b => b.key === key);
+  if (block) {
+    dispatch(changeBlockWidth(block.width));
+    dispatch(changeBlockHeight(block.height));
+  }
 };
 
 export default paperSlice.reducer;

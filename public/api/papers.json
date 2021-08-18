@@ -1,8 +1,8 @@
 {
   "data": [
-    { "key": "B0", "name": "4x6전지B", "width": 788, "heigth": 1091 },
-    { "key": "B2", "name": "2절지", "width": 545, "heigth": 788 },
-    { "key": "B4", "name": "4절지", "width": 394, "heigth": 545 },
-    { "key": "B8", "name": "8절지", "width": 272, "heigth": 394 }
+    { "key": "B0", "name": "4x6전지B", "width": 788, "height": 1091 },
+    { "key": "B2", "name": "2절지", "width": 545, "height": 788 },
+    { "key": "B4", "name": "4절지", "width": 394, "height": 545 },
+    { "key": "B8", "name": "8절지", "width": 272, "height": 394 }
   ]
 }

@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from  '../../app/hooks';
 import {
   selectPapers,
+  selectSamplePaper,
   fetchPapersAsync,
 } from './paperSlice';
 
@@ -16,8 +17,9 @@ export function PaperSelect() {
   }, []);
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSeleted(event.target.value);
-    console.log(event.target.value);
+    const key = event.target.value;
+    setSeleted(key);
+    dispatch(selectSamplePaper(key));
   };
 
   const options = papers.map(p => (
