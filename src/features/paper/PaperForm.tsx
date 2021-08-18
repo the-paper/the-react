@@ -57,6 +57,11 @@ export function PaperForm() {
     dispatch(changeBlockHeight(debounceBlockHeight));
   }, [dispatch, debounceBlockHeight]);
 
+  useEffect(() => {
+    setPaperWidth(paper.width);
+    setPaperHeight(paper.height);
+  }, [paper]);
+
   return (
       <form>
         <div className="row g-3">
