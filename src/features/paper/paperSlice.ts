@@ -56,6 +56,12 @@ export const paperSlice = createSlice({
   name: 'paper',
   initialState,
   reducers: {
+    changePaper: (state, action: PayloadAction<Paper>) => {
+      state.paper = action.payload;
+    },
+    changeBlock: (state, action: PayloadAction<Block>) => {
+      state.block = action.payload;
+    },
     changeBlockWidth: (state, action: PayloadAction<number>) => {
       state.block.width = action.payload;
     },
@@ -92,6 +98,8 @@ export const paperSlice = createSlice({
 });
 
 export const {
+  changePaper,
+  changeBlock,
   changeBlockWidth,
   changeBlockHeight,
   changePaperWidth,
@@ -116,13 +124,10 @@ export const selectSpaceY = (state: RootState) => {
 };
 
 export const selectSamplePaper = (key: string): AppThunk => (dispatch, getState) => {
-  console.log(key);
   const papers = selectPapers(getState());
   const paper = papers.find(p => p.key === key);
-  console.log(paper);
   if (paper) {
-    dispatch(changePaperWidth(paper.width));
-    dispatch(changePaperHeight(paper.height));
+    dispatch(changePaper(paper));
   }
 };
 
@@ -130,8 +135,7 @@ export const selectSampleBlock = (key: string): AppThunk => (dispatch, getState)
   const blocks = selectBlocks(getState());
   const block = blocks.find(b => b.key === key);
   if (block) {
-    dispatch(changeBlockWidth(block.width));
-    dispatch(changeBlockHeight(block.height));
+    dispatch(changeBlock(block));
   }
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { PaperForm } from './PaperForm';
 import { PaperSelect } from './PaperSelect';
 // import { MeasureExample } from './MeasureExample';
-// import { PaperTable } from './PaperTable';
+import { PaperTable } from './PaperTable';
 
 export function Paper() {
   return (
@@ -10,7 +10,7 @@ export function Paper() {
       <div className="my-5">
         <PaperForm />
         <PaperSelect />
-        {/*<PaperTable /> */}
+        <PaperTable />
         {/* <MeasureExample /> */}
       </div>
     </div>
