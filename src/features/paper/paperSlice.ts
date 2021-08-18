@@ -1,22 +1,31 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
-// import { fetchPapers } from './paperAPI';
+import { fetchPapers } from './paperAPI';
 
-export interface Paper {
-  name: string;
+
+export type Paper = {
   width: number;
   height: number;
-}
+};
 
-export interface Block {
+export type PaperSample = Paper & {
   name: string;
+  key: string;
+};
+
+export type Block = {
   width: number;
   height: number;
-}
+};
+
+export type BlockSample = Block & {
+  name: string;
+  key: string;
+};
 
 export interface PaperState {
-  papers: Paper[];
-  blocks: Block[];
+  papers: PaperSample[];
+  blocks: BlockSample[];
   status: 'idle' | 'loading' | 'failed';
   paper: Paper;
   block: Block;
@@ -27,24 +36,22 @@ const initialState: PaperState = {
   blocks: [],
   status: 'idle',
   block: {
-    name: '',
     width: 300,
     height: 200,
   },
   paper: {
-    name: '',
     width: 400,
     height: 300,
   },
 };
 
-// export const fetchPapersAsync = createAsyncThunk(
-//   'paper/fetchPapers',
-//   async () => {
-//     const response = await fetchPapers();
-//     return response;
-//   }
-// );
+export const fetchPapersAsync = createAsyncThunk(
+  'paper/fetchPapers',
+  async () => {
+    const response = await fetchPapers();
+    return response.data;
+  }
+);
 
 export const paperSlice = createSlice({
   name: 'paper',
@@ -73,16 +80,16 @@ export const paperSlice = createSlice({
       state.paper.height = width;
     },
   },
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(fetchPapersAsync.pending, (state) => {
-  //       state.status = 'loading';
-  //     })
-  //     .addCase(fetchPapersAsync.fulfilled, (state, action) => {
-  //       state.status = 'idle';
-  //       state.papers = action.payload;
-  //     });
-  // },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchPapersAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchPapersAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.papers = action.payload;
+      });
+  },
 });
 
 export const {
@@ -96,6 +103,18 @@ export const selectPapers = (state: RootState) => state.paper.papers;
 export const selectBlocks = (state: RootState) => state.paper.blocks;
 export const selectPaper = (state: RootState) => state.paper.paper;
 export const selectBlock = (state: RootState) => state.paper.block;
+
+export const selectSpaceX = (state: RootState) => {
+  const { width: pWidth } = state.paper.paper;
+  const { width: bWidth } = state.paper.block;
+  return (pWidth - bWidth) / 2;
+};
+
+export const selectSpaceY = (state: RootState) => {
+  const { height: pHeight } = state.paper.paper;
+  const { height: bHeight } = state.paper.block;
+  return (pHeight - bHeight) / 2;
+};
 
 export const afdsadsoijf = (value: number): AppThunk => (
   dispatch,

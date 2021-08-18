@@ -1,8 +1,0 @@
-{
-  "data": [
-    { "name": "4x6전지B", "width": 788, "heigth": 1091 },
-    { "name": "2절지", "width": 545, "heigth": 788 },
-    { "name": "4절지", "width": 394, "heigth": 545 },
-    { "name": "8절지", "width": 272, "heigth": 394 }
-  ]
-}

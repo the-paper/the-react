@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { ChangeEvent, useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from  '../../app/hooks';
+import useDebounce from './useDebounce'
 import {
   changePaperWidth,
   changePaperHeight,
@@ -11,11 +12,50 @@ import {
 import styles from './PaperForm.module.css';
 
 export function PaperForm() {
-  const paperWidth = useAppSelector(selectPaper).width;
-  const paperHeight = useAppSelector(selectPaper).height;
-  const blockWidth = useAppSelector(selectBlock).width;
-  const blockHeight = useAppSelector(selectBlock).height;
   const dispatch = useAppDispatch();
+  const paper = useAppSelector(selectPaper);
+  const block = useAppSelector(selectBlock);
+
+  const [paperWidth, setPaperWidth] = useState(paper.width);
+  const [paperHeight, setPaperHeight] = useState(paper.height);
+  const [blockWidth, setBlockWidth] = useState(block.width);
+  const [blockHeight, setBlockHeight] = useState(block.height);
+  const debouncePaperWidth = useDebounce(paperWidth, 1000);
+  const debouncePaperHeight = useDebounce(paperHeight, 1000);
+  const debounceBlockWidth = useDebounce(blockWidth, 1000);
+  const debounceBlockHeight = useDebounce(blockHeight, 1000);
+
+  const handlePaperWidth = (event: ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseInt(event.target.value);
+    setPaperWidth(newValue);
+  };
+  useEffect(() => {
+    dispatch(changePaperWidth(debouncePaperWidth));
+  }, [dispatch, debouncePaperWidth]);
+
+  const handlePaperHeight = (event: ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseInt(event.target.value);
+    setPaperHeight(newValue);
+  };
+  useEffect(() => {
+    dispatch(changePaperHeight(debouncePaperHeight));
+  }, [dispatch, debouncePaperHeight]);
+
+  const handleBlockWidth = (event: ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseInt(event.target.value);
+    setBlockWidth(newValue);
+  };
+  useEffect(() => {
+    dispatch(changeBlockWidth(debounceBlockWidth));
+  }, [dispatch, debounceBlockWidth]);
+
+  const handleBlockHeight = (event: ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseInt(event.target.value);
+    setBlockHeight(newValue);
+  };
+  useEffect(() => {
+    dispatch(changeBlockHeight(debounceBlockHeight));
+  }, [dispatch, debounceBlockHeight]);
 
   return (
       <form>
@@ -32,7 +72,7 @@ export function PaperForm() {
                 placeholder="Width"
                 min="0"
                 value={paperWidth}
-                onChange={(e) => dispatch(changePaperWidth(parseInt(e.target.value)))}
+                onChange={handlePaperWidth}
               />
               <label htmlFor="paperWidth">Width (mm)</label>
             </div>
@@ -46,7 +86,7 @@ export function PaperForm() {
                 placeholder="Height"
                 min="0"
                 value={paperHeight}
-                onChange={(e) => dispatch(changePaperHeight(parseInt(e.target.value)))}
+                onChange={handlePaperHeight}
               />
               <label htmlFor="paperHeight">Height (mm)</label>
             </div>
@@ -65,7 +105,7 @@ export function PaperForm() {
                 placeholder="Width"
                 min="0"
                 value={blockWidth}
-                onChange={(e) => dispatch(changeBlockWidth(parseInt(e.target.value)))}
+                onChange={handleBlockWidth}
               />
               <label htmlFor="blockWidth">Width (mm)</label>
             </div>
@@ -79,7 +119,7 @@ export function PaperForm() {
                 placeholder="Height"
                 min="0"
                 value={blockHeight}
-                onChange={(e) => dispatch(changeBlockHeight(parseInt(e.target.value)))}
+                onChange={handleBlockHeight}
               />
               <label htmlFor="blockHeight">Height (mm)</label>
             </div>
