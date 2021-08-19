@@ -2,32 +2,21 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
 import { fetchPapers } from './paperAPI';
 
-export type Paper = {
+export type Rectangle = {
   width: number;
   height: number;
 };
-
-export type PaperSample = Paper & {
-  name: string;
+export type Sample = Rectangle & {
   key: string;
-};
-
-export type Block = {
-  width: number;
-  height: number;
-};
-
-export type BlockSample = Block & {
   name: string;
-  key: string;
 };
 
 export interface PaperState {
-  papers: PaperSample[];
-  blocks: BlockSample[];
+  papers: Sample[];
+  blocks: Sample[];
   status: 'idle' | 'loading' | 'failed';
-  paper: Paper;
-  block: Block;
+  paper: Rectangle;
+  block: Rectangle;
 }
 
 const initialState: PaperState = {
@@ -56,10 +45,10 @@ export const paperSlice = createSlice({
   name: 'paper',
   initialState,
   reducers: {
-    changePaper: (state, action: PayloadAction<Paper>) => {
+    changePaper: (state, action: PayloadAction<Rectangle>) => {
       state.paper = action.payload;
     },
-    changeBlock: (state, action: PayloadAction<Block>) => {
+    changeBlock: (state, action: PayloadAction<Rectangle>) => {
       state.block = action.payload;
     },
     changeBlockWidth: (state, action: PayloadAction<number>) => {

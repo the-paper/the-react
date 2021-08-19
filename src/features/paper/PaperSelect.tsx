@@ -4,6 +4,7 @@ import {
   selectPapers,
   selectSamplePaper,
   fetchPapersAsync,
+  Sample,
 } from './paperSlice';
 
 export function PaperSelect() {
@@ -22,7 +23,7 @@ export function PaperSelect() {
     dispatch(selectSamplePaper(key));
   };
 
-  const options = papers.map(p => (
+  const options = papers.map((p: Sample) => (
     <option key={p.key} value={p.key}>{p.name}</option>
   ));
 

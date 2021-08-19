@@ -1,7 +1,7 @@
-import { Sample } from './paperSlice';
+import { Sample } from "./mesurementSlice";
 
 export function fetchPapers(): Promise<{ data: Sample[] }> {
-  return fetch('/api/papers.json', {
+  return fetch('api/papers.json', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
