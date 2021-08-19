@@ -1,7 +1,7 @@
-import { Sample } from "./mesurementSlice";
+import { RectangleKind, Sample } from "./mesurementSlice";
 
-export function fetchPapers(): Promise<{ data: Sample[] }> {
-  return fetch('api/papers.json', {
+export function fetchSamples(kind: RectangleKind): Promise<{ data: Sample[] }> {
+  return fetch(`./api/${kind}.json`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
