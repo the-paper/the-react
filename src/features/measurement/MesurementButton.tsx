@@ -2,18 +2,17 @@ import React from 'react';
 import { ArrowCounterclockwise } from '../icons/ArrowCounterclockwise';
 
 type Props = {
+  label?: string;
   handleValue: () => void;
 };
 
 export function MesurementButton(props: Props) {
   return (
-    <div>
-      <button
-        className="btn btn-outline-primary btn-lg"
-        onClick={e => props.handleValue()}
+    <button
+      className="btn btn-outline-primary mb-md-3"
+      onClick={e => props.handleValue()}
       >
-        <ArrowCounterclockwise />
-      </button>
-    </div>
+      <ArrowCounterclockwise /> {props.label}
+    </button>
   );
 }

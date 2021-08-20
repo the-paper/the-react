@@ -14,7 +14,7 @@ export function MesurementSelect(props: Props) {
   ))
 
   return (
-    <div className="form-floating mb-3">
+    <div className="form-floating mb-md-3">
       <select
         className="form-select"
         aria-label="Default select example"

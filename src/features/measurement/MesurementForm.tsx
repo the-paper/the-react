@@ -33,58 +33,61 @@ export function MesurementForm() {
 
   return (
     <div>
-      <div className="row g-3">
-        <div className="col">
+      <div className="row g-3 mb-3">
+        <div className="col-6 col-md">
           <MesurementInput
             label="Paper's Width"
             value={paper.width}
             handleValue={value => dispatch(resizePaperWidth(value))}
             />
         </div>
-        <div className="col">
+        <div className="col-6 col-md order-1 order-md-2">
           <MesurementInput
             label="Paper's Height"
             value={paper.height}
             handleValue={value => dispatch(resizePaperHeight(value))}
           />
         </div>
-      </div>
-      <div className="row g-3">
-        <div className="col">
-          <MesurementInput
-            label="Block's Width"
-            value={block.width}
-            handleValue={value => dispatch(resizeBlockWidth(value))}
-            />
-        </div>
-        <div className="col">
-          <MesurementInput
-            label="Block's Height"
-            value={block.height}
-            handleValue={value => dispatch(resizeBlockHeight(value))}
-          />
-        </div>
-      </div>
-      <div className="row g-3">
-        <div className="col">
+        <div className="col-6 col-md order-2 order-md-3">
           <MesurementSelect
             label="Samples of Paper"
             handleValue={value => dispatch(pickPaper(value))}
             options={papers}
           />
         </div>
-        <div className="col d-grid mx-auto">
+        <div className="col-6 col-md d-grid mx-auto">
           <MesurementButton
+            label="Rotate"
             handleValue={() => dispatch(rotatePaper())}
           />
         </div>
       </div>
       <div className="row g-3">
-        <div className="col">
+        <div className="col-6 col-md">
+          <MesurementInput
+            label="Block's Width"
+            value={block.width}
+            handleValue={value => dispatch(resizeBlockWidth(value))}
+            />
+        </div>
+        <div className="col-6 col-md">
+          <MesurementInput
+            label="Block's Height"
+            value={block.height}
+            handleValue={value => dispatch(resizeBlockHeight(value))}
+          />
+        </div>
+        <div className="col-6 col-md">
           <MesurementSelect
             label="Samples of Block"
             handleValue={value => dispatch(pickBlock(value))}
             options={blocks}
+          />
+        </div>
+        <div className="col-6 col-md d-grid mx-auto">
+          <MesurementButton
+            label="Rotate"
+            handleValue={() => dispatch(rotateBlock())}
           />
         </div>
       </div>

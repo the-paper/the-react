@@ -8,7 +8,7 @@ type Props = {
 
 export function MesurementInput(props: Props) {
   return (
-    <div className="form-floating mb-3">
+    <div className="form-floating mb-md-3">
       <input
         type="number"
         className="form-control"
