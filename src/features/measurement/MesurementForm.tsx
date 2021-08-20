@@ -1,19 +1,22 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { MesurementButton } from './MesurementButton';
 import { MesurementInput } from './MesurementInput';
 import { MesurementSelect } from './MesurementSelect';
 import {
   resizePaperWidth,
   resizePaperHeight,
+  rotatePaper,
   pickPaper,
-  selectPaper,
-  selectPapers,
   resizeBlockWidth,
   resizeBlockHeight,
+  rotateBlock,
   pickBlock,
+  ladingSamplesAsync,
+  selectPaper,
+  selectPapers,
   selectBlock,
   selectBlocks,
-  ladingSamplesAsync,
 } from './mesurementSlice';
 
 export function MesurementForm() {
@@ -65,16 +68,21 @@ export function MesurementForm() {
       <div className="row g-3">
         <div className="col">
           <MesurementSelect
-            label="종이 샘플"
+            label="Samples of Paper"
             handleValue={value => dispatch(pickPaper(value))}
             options={papers}
+          />
+        </div>
+        <div className="col d-grid mx-auto">
+          <MesurementButton
+            handleValue={() => dispatch(rotatePaper())}
           />
         </div>
       </div>
       <div className="row g-3">
         <div className="col">
           <MesurementSelect
-            label="블록 샘플"
+            label="Samples of Block"
             handleValue={value => dispatch(pickBlock(value))}
             options={blocks}
           />
