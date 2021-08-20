@@ -106,7 +106,9 @@ export const selectPaper = (state: RootState) => state.mesurement.paper;
 export const selectPapers = (state: RootState) => state.mesurement.papers;
 export const selectBlock = (state: RootState) => state.mesurement.block;
 export const selectBlocks = (state: RootState) => state.mesurement.blocks;
+
 export const pickPaper = (key: string): AppThunk => (dispatch, getState) => {
+  console.log(key);
   const samples = selectPapers(getState());
   const sample = samples.find(s => s.key === key);
   if (sample) {

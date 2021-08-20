@@ -1,9 +1,9 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import mesurementSlice from '../features/measurement/mesurementSlice';
+import mesurementReducer from '../features/measurement/mesurementSlice';
 
 export const store = configureStore({
   reducer: {
-    mesurement: mesurementSlice,
+    mesurement: mesurementReducer,
   },
 });
 

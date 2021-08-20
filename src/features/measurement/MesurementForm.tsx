@@ -1,32 +1,44 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../app/hooks';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { MesurementInput } from './MesurementInput';
+import { MesurementSelect } from './MesurementSelect';
 import {
   resizePaperWidth,
   resizePaperHeight,
+  pickPaper,
   selectPaper,
+  selectPapers,
   resizeBlockWidth,
   resizeBlockHeight,
+  pickBlock,
   selectBlock,
+  selectBlocks,
+  ladingSamplesAsync,
 } from './mesurementSlice';
 
 export function MesurementForm() {
   const dispatch = useAppDispatch();
-  const paper = useSelector(selectPaper);
-  const block = useSelector(selectBlock);
+  const paper = useAppSelector(selectPaper);
+  const block = useAppSelector(selectBlock);
+  const papers = useAppSelector(selectPapers);
+  const blocks = useAppSelector(selectBlocks);
+  
+  useEffect(() => {
+    dispatch(ladingSamplesAsync('papers'));
+    dispatch(ladingSamplesAsync('blocks'));
+  }, [dispatch]);
 
   return (
     <div>
       <div className="row g-3">
-        <div className="col-12 col-sm-6">
+        <div className="col">
           <MesurementInput
             label="Paper's Width"
             value={paper.width}
             handleValue={value => dispatch(resizePaperWidth(value))}
             />
         </div>
-        <div className="col-12 col-sm-6">
+        <div className="col">
           <MesurementInput
             label="Paper's Height"
             value={paper.height}
@@ -47,6 +59,24 @@ export function MesurementForm() {
             label="Block's Height"
             value={block.height}
             handleValue={value => dispatch(resizeBlockHeight(value))}
+          />
+        </div>
+      </div>
+      <div className="row g-3">
+        <div className="col">
+          <MesurementSelect
+            label="종이 샘플"
+            handleValue={value => dispatch(pickPaper(value))}
+            options={papers}
+          />
+        </div>
+      </div>
+      <div className="row g-3">
+        <div className="col">
+          <MesurementSelect
+            label="블록 샘플"
+            handleValue={value => dispatch(pickBlock(value))}
+            options={blocks}
           />
         </div>
       </div>
