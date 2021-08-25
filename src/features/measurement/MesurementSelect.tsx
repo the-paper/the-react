@@ -9,7 +9,7 @@ type Props = {
 
 export function MesurementSelect(props: Props) {
 
-  const options = props.options.map(({ key, name}) => (
+  const options = props.options.map(({ key, name }) => (
     <option key={key} value={key}>{name}</option>
   ))
 
