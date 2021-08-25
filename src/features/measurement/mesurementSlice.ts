@@ -4,6 +4,20 @@ import { fetchSamples } from './mesurementAPI';
 
 export type RectangleKind = 'papers' | 'blocks';
 
+export interface Paper {
+  kind: 'paper';
+  width: number;
+  height: number;
+}
+
+export interface Block {
+  kind: 'block';
+  width: number;
+  height: number;
+}
+
+type Rect = Paper | Block;
+
 export type Rectangle = {
   width: number;
   height: number;
