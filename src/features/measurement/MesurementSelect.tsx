@@ -11,7 +11,7 @@ export function MesurementSelect(props: Props) {
 
   const options = props.options.map(({ key, name }) => (
     <option key={key} value={key}>{name}</option>
-  ))
+  ));
 
   return (
     <div className="form-floating mb-md-3">
@@ -25,5 +25,5 @@ export function MesurementSelect(props: Props) {
       </select>
       <label htmlFor="floatingSelect">{props.label}</label>
     </div>
-  )
+  );
 }

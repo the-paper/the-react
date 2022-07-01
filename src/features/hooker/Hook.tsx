@@ -1,6 +1,6 @@
 import React from 'react';
-import { UseEffect } from './UseEffect';
 import { UseState } from './UseState';
+import { UseEffect } from './UseEffect';
 import { UseReducer } from './UseReducer';
 import { UseRef } from './UseRef';
 

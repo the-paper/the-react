@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
 import { fetchSamples } from './mesurementAPI';
 
-export type RectangleKind = 'papers' | 'blocks';
+// export type RectangleKind = 'papers' | 'blocks';
 
 export interface Paper {
   kind: 'paper';
@@ -16,17 +16,24 @@ export interface Block {
   height: number;
 }
 
-type Rect = Paper | Block;
 
-export type Rectangle = {
-  width: number;
-  height: number;
-};
+export type Rectangle = Paper | Block;
+// export type RectangleKind = 
 
 export type Sample = Rectangle & {
   key: string;
   name: string;
-};
+}
+
+// export type Rectangle = {
+//   width: number;
+//   height: number;
+// };
+
+// export type Sample = Rectangle & {
+//   key: string;
+//   name: string;
+// };
 
 export type MesurementState = {
   status: 'idle' | 'loading' | 'failed';
@@ -40,11 +47,13 @@ const initialState: MesurementState = {
   status: 'idle',
   papers: [],
   paper: {
+    kind: 'paper',
     width: 400,
     height: 300,
   },
   blocks: [],
   block: {
+    kind: 'block',
     width: 300,
     height: 200,
   },
@@ -72,8 +81,8 @@ export const mesurementSlice = createSlice({
     },
     // 90도로 회전한다.
     rotatePaper: (state) => {
-      const { width: height, height: width } = state.paper;
-      state.paper = { width, height };
+      const { kind, width: height, height: width } = state.paper;
+      state.paper = { kind, width, height };
     },
     changePaper: (state, action: PayloadAction<Rectangle>) => {
       state.paper = action.payload;
@@ -85,8 +94,8 @@ export const mesurementSlice = createSlice({
       state.block.height = action.payload
     },
     rotateBlock: (state) => {
-      const { width: height, height: width } = state.block;
-      state.block = { width, height };
+      const { kind, width: height, height: width } = state.block;
+      state.block = { kind, width, height };
     },
     changeBlock: (state, action: PayloadAction<Rectangle>) => {
       state.block = action.payload;
